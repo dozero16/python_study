@@ -1,0 +1,50 @@
+print("Welcome to Hangman game")
+
+word_list = (
+  "baduk", 
+  "jazz",
+  "piano",
+  "microwave",
+  "apple",
+  "marketing"
+  )
+
+import random
+
+selected_word = random.choice(word_list)
+p_word = []
+
+for i in range(len(selected_word)):
+    p_word += "_"
+
+#print(f"This line is for test {selected_word}")
+
+print(" ".join(p_word))
+
+
+lives = 6
+
+end_of_game = False
+
+
+
+while end_of_game == False:
+    guess = input("\nwrite a letter you guess : ").lower()
+    if guess in selected_word:
+        for i in range(len(selected_word)):
+            letter = selected_word[i]
+            if letter == guess:
+                p_word[i] = guess
+        if "".join(p_word)==selected_word:
+            end_of_game = True
+            print("\nYou win")
+    else: 
+        lives -= 1
+        print(f"\nyou guessed {guess}, that's not in the word. You have {lives}chances left")
+        if lives == 0:
+            end_of_game = True
+            print("\nYou lose")
+
+    print(" ".join(p_word))
+
+    
