@@ -1,0 +1,64 @@
+# Caesar Cipher
+# before learning
+
+alphabet = [
+    'a', 'b', 'c', 'd', 'e', 'f', 'g',
+    'h', 'i', 'j', 'k', 'l', 'm', 'n',
+    'o', 'p', 'q', 'r', 's', 't', 'u',
+    'v', 'w', 'x', 'y', 'z']
+
+print("Welcome to Caesar Cipher")
+
+en_or_de = input("Type 'encode' or 'en' to encrypt, type 'decode' or 'de' to decrypt : ")
+
+def list_to_int(x):
+    re_list = []
+    for i in x:
+        if i in alphabet:
+            i = alphabet.index(i)
+            re_list.append(i)
+        else:
+            re_list.append(i)
+    return re_list
+
+def int_list_to_list(x):
+    encode_list = []
+    num = int(input("Type your shift number : "))
+    for i in x:
+        if type(i) == int:
+            i = (int(i) + num)%26
+            encode_list.append(alphabet[i])
+        else:
+            encode_list.append(i)
+    return encode_list
+
+def int_list_to_list_de(x):
+    encode_list = []
+    num = int(input("Type your shift number : "))
+    for i in x:
+        if type(i) == int:
+            i = (int(i) - num)%26
+            encode_list.append(alphabet[i])
+        else:
+            encode_list.append(i)
+    return encode_list
+    
+
+if en_or_de == "encode" or en_or_de == "en":
+    text = input("Type your message : ").lower()
+    text_list = list(text)
+    list_to_int(text_list)
+    last_list = int_list_to_list(list_to_int(text_list))
+    answer = ''.join(last_list)
+    print("here is encoded result : ", answer)
+    
+elif en_or_de == "decode" or en_or_de == "de":
+    text = input("Type your message : ").lower()
+    text_list = list(text)
+    list_to_int(text_list)
+    last_list = int_list_to_list_de(list_to_int(text_list))
+    answer = ''.join(last_list)
+    print("here is decoded result : ", answer)
+
+else:
+    print("please insert 'encode' or 'decode' messages")
