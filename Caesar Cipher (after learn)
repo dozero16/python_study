@@ -1,0 +1,44 @@
+#ceasar_cipher_after_learning
+
+alphabet = ['a', 'b', 'c', 'd', 'e',
+            'f', 'g', 'h', 'i', 'j',
+            'k', 'l', 'm', 'n', 'o',
+            'p', 'q', 'r', 's', 't',
+            'u', 'v', 'w', 'x', 'y',
+            'z']
+
+
+def ceasar(en_or_de, words, shift):
+    new_letter = ""
+    if en_or_de in ["encode", "en", "decode", "de"]:
+        if en_or_de == "decode" or en_or_de == "de":
+            shift *= -1
+        for letter in words:
+            if letter in alphabet:
+                position = alphabet.index(letter)
+                new_position = (position + shift)%26
+                new_letter += alphabet[new_position]
+            else:
+                new_letter += letter
+        print(f"Here is the result: {new_letter}")            
+    else:
+        print("Please write right words. 'encode', 'en', 'decode', 'de'")
+
+run_again = True
+while run_again:
+
+    selection = input("Type 'encode' or 'en' to encrypt, type 'decode' or 'de' to decrypt\n").lower()
+    start_words = input("Type your message\n").lower()
+    shift_num = int(input("Type the shift number\n"))
+
+    ceasar(en_or_de = selection, words = start_words, shift = shift_num)
+    choice = input("\nType 'yes' if you want to go again. Otherwise type 'no'\n").lower()
+    if choice == "yes":
+        None
+    elif choice == "no":
+        print("Good bye")
+        run_again = False
+    else:
+        print("You type wrong command. if you want to again, press run button")
+
+
