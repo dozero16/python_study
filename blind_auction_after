@@ -4,8 +4,6 @@ from replit import clear
 
 print("Blind Auction")
 
-{"James" : 99, "Lana" : 123}
-
 auc_dict = {}
 go_on = True
 
