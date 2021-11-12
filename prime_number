@@ -1,0 +1,22 @@
+# prime number
+
+def prime_checker(start_num):
+    prime = True
+    if start_num <= 1:
+        prime = False
+    else:
+        for num in list(range(2, int(start_num**(1/2)+1))):
+            if start_num % num == 0:
+                prime = False
+            else:
+                None
+    print(f"{start_num} is prime number : {prime}")
+                
+
+check_num = int(input("type number : "))
+
+prime_checker(start_num = check_num)
+
+
+
+
