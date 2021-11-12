@@ -1,0 +1,33 @@
+# blind auction with dictionary before learning
+
+dict = {}
+
+go_on = True
+
+while go_on:
+    name_start = input("What is your name? ")
+    bid_start = int(input("What is your bid? $"))
+    other_person = input("Are there any other bidders? 'yes' or 'no' ")
+    dict[name_start] = bid_start
+    if other_person == "no":
+        go_on = False
+# check print(dict)
+
+dict_key = []
+for i in dict:
+    dict_key.append(i)
+
+# check print(dict_key)
+
+expensive_bid = 0
+expensive_person = ""
+for i in dict_key:
+    if expensive_bid <= dict[i]:
+        expensive_bid = dict[i]
+        expensive_person = i
+
+# check print(expensive_bid)
+    
+print(f"The winner is {expensive_person} with a bid of {expensive_bid}")
+
+
