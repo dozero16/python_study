@@ -1,0 +1,36 @@
+# calculator
+
+import replit
+
+# if you don't use replit, then delete line3 "replit.clear()" and line32 "replit.clear()"
+
+def final(sta, ope, nex):
+    if ope == "+":
+        return sta + nex
+    elif ope == "-":
+        return sta - nex
+    elif ope == "*":
+        return sta * nex
+    elif ope == "/":
+        return sta / nex
+    else:
+        return "Invalid input"
+    
+calculator = True
+start_num = float(input("What is the first number: "))
+print("+\n-\n*\n/")
+    
+while calculator:
+    operator = input("pick an operator: ")
+    next_num = float(input("What is the next number: "))
+    final_num = final(sta = start_num, ope = operator, nex = next_num)
+    print(f"{start_num} {operator} {next_num} = {final_num}")
+    resume = input(f"Type 'y' to continue calculating with {final_num}, or type 'n' to start a nex calculation: ")
+    if resume == "y":
+        start_num = final_num
+    elif resume == "n":
+        replit.clear()
+        # print("clear console")
+        # if you don't use replit, then delete "replit.clear()"
+    else:
+        calculator = False
