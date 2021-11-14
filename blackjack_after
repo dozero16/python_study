@@ -1,0 +1,89 @@
+############### Blackjack Project 
+
+## cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+from art import logo
+from replit import clear
+from random import choice
+
+# king, queen, jack is 10, ace can be 1 or 11
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+
+def deal_card():
+  return choice(cards)
+
+def compare(x, y):
+  if x == 0 and y == 0:
+    return "draw"
+  elif x == 0:
+    return "You win"
+  elif y == 0:
+    return "You lose"
+  elif x == y:
+    return "draw"
+  elif x > 21:
+    return "You lose"
+  elif y > 21:
+    return "You win"    
+  elif x > y:
+    return "You win"
+  else:
+    return "You lose"
+
+def calculate_score(card):
+  if sum(card) == 21 and len(card) == 2:
+    return 0  # blackjack 
+  if sum(card) > 21 and 11 in card:
+    card.remove(11)
+    card.append(1)
+    return sum(card)
+  else:
+    return sum(card)
+
+def blackjack():
+  user_cards = []
+  computer_cards = []
+
+  for _ in range(2):
+    user_cards.append(deal_card())
+    computer_cards.append(deal_card())
+
+  print(logo)
+  print(f"    Your card is {user_cards}, sum: {calculate_score(user_cards)}\n    computer's card: {computer_cards[0]}")
+
+  game_over = False
+
+  while not game_over:
+    if calculate_score(user_cards) == 0 or calculate_score(computer_cards) == 0:
+      game_over = True
+      print(f"    Your card is {user_cards}, sum: {calculate_score(user_cards)}")
+    elif calculate_score(user_cards) > 21:
+      game_over = True
+    else:
+      another_card = input("want to draw another card? type 'y' or 'n': ").lower()
+      if another_card == "y":
+        user_cards.append(deal_card())
+      else:
+        game_over = True  
+      print(f"    Your card is {user_cards}, sum: {calculate_score(user_cards)}")
+    
+  while calculate_score(computer_cards) < 17:
+    computer_cards.append(deal_card())    
+
+  print(f"\n    Your final card is {user_cards}, sum: {calculate_score(user_cards)}")
+  print(f"    Computer's final card is {computer_cards}, sum: {calculate_score(computer_cards)}")
+  print(compare(calculate_score(user_cards), calculate_score(computer_cards)))
+
+  go_stop = input("Want to restart? type 'y' or type 'n' to stop: ").lower()
+  if go_stop == "y":
+    clear()
+    blackjack()
+
+  elif go_stop == "n":
+    clear()
+    print("Good bye")
+
+  else:
+    clear()
+    print("Invalid input\nGood bye")
+
+blackjack()
