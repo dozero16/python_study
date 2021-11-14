@@ -1,0 +1,111 @@
+# Blackjack game
+import random
+# import replit
+
+logo = (
+"""
+.------.        _       _                   _          _                   _ 
+l A    l       l l     l l                 l l __     l_l                 l l __ 
+l /\/\ l       l l__   l l  ____      ___  l l/ /     ---  ____      ___  l l/ / 
+l \  /.------. l __ \  l l /  _ \    / __l l   l      l l /  _ \    / __l l   l  
+l  \/Al K/\  l l l_l l l l l l_l \_ l l__  l l\ \     / / l l_l \_ l l__  l l\ \ 
+'-----l /  \ l l____/  l_l \____/\_\ \___l l_l \_\   /_/  \____/\_\ \___l l_l \_\
+      l \  / l
+      l  \/K l
+      '------'
+""")
+
+# make random int
+random.randint(1,10)
+
+# card append function
+def random_card_app(card, count):
+    for num in range(count):
+        card.append(random.randint(1,10))
+
+# card number sum function
+def check_num(card):
+    num_sum = 0
+    for num in card:
+        num_sum += num
+    return num_sum
+
+# win or lose
+def win_lose(play, com):
+    compare1 = 0
+    compare2 = 0
+    if play > 22:
+        if com <= 21:
+            print("You lose")
+        else:
+            compare1 = play - 21
+            compare2 = com - 21
+            if compare1 > compare2:
+                print("You lose")
+            elif compare1 < compare2:
+                print("You win")
+            else:
+                print("Draw")
+    elif play == 21:
+        if com == 21:
+            print("Draw")
+        else:        
+            print("You win")
+    else:
+        if com > 21:
+            print("You win")
+        else:
+            compare1 = 21 - play
+            compare2 = 21 - com
+            if compare1 > compare2:
+                print("You lose")
+            elif compare1 < compare2:
+                print("You win")
+            else:
+                print("Draw")
+
+    
+def blackjack():
+    game = False
+    game_play = input("You want to play game? type 'y' to play, 'n' to stop: ").lower()
+    # replit.clear()
+    
+    if game_play == "y":
+        game = True
+        print(logo)
+        while game:    
+            player_card = []
+            computer_card = []
+            # start with two card
+            random_card_app(card = player_card, count = 2)
+            random_card_app(card = computer_card, count = 2)
+            # computer card make
+            while check_num(computer_card) <= 15:
+                random_card_app(card = computer_card, count = 1)
+            print(f"""    Your card: {player_card}. Current score: {check_num(player_card)},
+        Computer's first card: {computer_card[0]}""")
+            while check_num(player_card) <= 21:
+                more_card = input("Type 'y' to get another card. type 'n' to pass: ").lower()
+                if more_card == "y":
+                    random_card_app(card = player_card, count = 1)
+                    print(f"""    Your card: {player_card}. Current score: {check_num(player_card)},
+        Computer's first card: {computer_card[0]}""")
+                elif more_card == "n":
+                    break
+            print(f"""
+        Your final hand: {player_card}. Final score: {check_num(player_card)},
+        Computer's final hand: {computer_card}, Final score: {check_num(computer_card)}""")
+            win_lose(play = check_num(player_card), com = check_num(computer_card))
+            blackjack()
+            break
+
+    elif game_play == "n":
+        game = False
+        print("Good bye")
+        
+    else:
+        print("Valid input")
+        blackjack()
+
+blackjack()
+
