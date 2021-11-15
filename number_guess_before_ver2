@@ -1,6 +1,6 @@
 import random
 from art import logo
-from replit import clear
+#from replit import clear
 
 def game():
   """
@@ -10,10 +10,10 @@ def game():
   """
   game_play = input("Do you want to play Number Guessing Game?\nType 'y' to start or type 'n' to stop: ").lower()
   if game_play == "y":
-    clear()
+    #clear()
     return True
   elif game_play == "n":
-    clear()
+    #clear()
     print("Good Bye")
     return False
   else:
@@ -64,7 +64,7 @@ I'm thinking of a number between 1 and 100
   life = choose_level() # make life variable
   clear()
 
-  print(f" # # # # # This line for test - The number: {random_number}")
+  #print(f" # # # # # This line for test - The number: {random_number}")
   print(f"You have {life} attempts remaining to guess the number.")
 
   while life > 0:
