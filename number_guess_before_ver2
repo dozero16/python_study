@@ -1,0 +1,93 @@
+import random
+from art import logo
+from replit import clear
+
+def game():
+  """
+  A function used for check the user want to start game or stop game.
+  There is no input in game()
+  And return True(want to play) or False(stop play & say good bye)
+  """
+  game_play = input("Do you want to play Number Guessing Game?\nType 'y' to start or type 'n' to stop: ").lower()
+  if game_play == "y":
+    clear()
+    return True
+  elif game_play == "n":
+    clear()
+    print("Good Bye")
+    return False
+  else:
+    print("\nPlease type correct letter.\n")
+    return game()
+
+on_off = game() # True(game_on) of False(game_off)
+
+def choose_level():
+  """
+  A function choose level.
+  if user type 'hard' then 5 life will be given
+  elif type 'easy' get 10 life.
+  it return a number(5, 10)
+  """
+  life = 0
+  select_level = input("Choose a difficulty. Type 'hard' or 'easy': ").lower()
+  if select_level == 'hard':
+    life = 5
+    return life
+  elif select_level == 'easy':
+    life = 10
+    return life
+  else:
+    print("\nSelect level\n")
+    return choose_level()
+
+def guess():
+  """
+  A function just ask user a input
+  integer number will be made
+  return a number what player guessed
+  """
+  try:
+    player_num = int(input("Make your guess: "))
+    return player_num
+  except:
+    print("\nYou have to type a integer number. Like 1, 7, 53, 100")
+    return guess()
+
+while on_off:
+  print(logo)
+  print("""
+Welcome to Number Guessing Game!
+I'm thinking of a number between 1 and 100
+""")
+  random_number = random.randint(1, 100) # make a number
+  life = choose_level() # make life variable
+  clear()
+
+  print(f" # # # # # This line for test - The number: {random_number}")
+  print(f"You have {life} attempts remaining to guess the number.")
+
+  while life > 0:
+    user_num = guess() # user input 1 number to guess
+    if user_num == random_number:
+      print(f"You got it! The answer was {random_number}")
+      on_off = False
+      break
+    elif user_num > random_number:
+      print("Too high")
+      life -= 1
+      print(f"You have {life} attempts remaining to guess the number")
+    elif user_num < random_number:
+      print("Too low")
+      life -= 1
+      print(f"You have {life} attempts remaining to guess the number")
+    else:
+      print("error_occured")
+
+  if life == 0:
+    print("\nYou've run out of guesses, you lose.")
+  on_off = False
+
+  
+
+
