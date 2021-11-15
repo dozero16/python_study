@@ -1,0 +1,47 @@
+import random
+from art import logo
+
+def start():
+  try:
+    selected_num = int(input("Please type a number in 1 ~ 100: "))
+    if selected_num > 100 or selected_num < 0:
+      print("Type a number in 1 ~ 100")
+      start()
+    else:
+      return selected_num
+  except:
+    print("Type invalid letter. please type integer number")
+    start()
+
+
+print("Number Guessing Game")
+print(logo)
+
+answer_num = random.randint(1, 100)
+print(f"Test code {answer_num}")
+
+level = input("Type 'easy' or 'hard': ").lower()
+
+if level == "easy":
+  life = 10
+elif level == "hard":
+  life = 5
+else:
+  life = 10
+
+while not life == 0:
+  number = start() 
+  if number > answer_num:
+    print("\nToo high")
+    life -= 1
+    print(f"Life: {life}")
+  elif number < answer_num:
+    print("\nToo low")
+    life -= 1
+    print(f"Life: {life}")
+  else:
+    print(f"\nCorrect! Answer: {answer_num}")
+    break
+
+if life == 0:
+  print("You lose")
