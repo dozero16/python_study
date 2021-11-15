@@ -1,4 +1,5 @@
 # 09:02:10
+# 09:08:49    
 
 print("Hello this is the guess number program")
 print("number is in 1~100 including 1 and 100")
@@ -9,11 +10,11 @@ answer = random.randint(1,100)
 def level():
     level = input("What level do you want? type 'hard' or 'easy' to select level: ").lower()
     if level == "hard":
-        life = 5
+        life = 5 # remove this line
         return 5
     elif level == "easy":
-        life = 10
-        return 10
+        life = 10 # remove this line
+        return 10 
     else:
         print("please input valid input")
         return level
@@ -27,12 +28,14 @@ while life > 0:
     if user_guess > answer:
         print("Too high")
         life -= 1
+        # add line to print life
     elif user_guess < answer:
         print("Too low")
         life -= 1
+        # add line to print life
     else:
         print(f"Correct answer. the number is {answer}")
         break
-
-# 09:08:49    
+        
+# add line if life == 0 print lose
 
