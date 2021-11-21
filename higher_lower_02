@@ -1,0 +1,52 @@
+data = [
+    {'name': 'Camila Cabello','count': 55},
+    {'name': 'NBA','count': 47},
+    {'name': 'ABC','count': 33},
+    {'name': 'aaaABC','count': 33}]
+
+import random
+
+print("higher or lower")
+A = random.choice(data)
+B = random.choice(data)
+
+def make_B(input_A, input_B):
+    while input_A['count'] == input_B['count']:
+        input_B = random.choice(data)
+    return input_B
+
+B = make_B(A, B)
+
+print(f"Compare {A['name']} is {A['count']}")
+print('vs')
+print(f"Against {B['name']} is {B['count']}")
+
+
+score = 0
+game = True
+while game:
+    print(f"Your score is {score}.")
+    a_or_b = input("\nwho is winner A or B: ").lower()
+    if a_or_b == 'a' and A['count'] > B['count']:
+        print("You're right")
+        B = random.choice(data)
+        B = make_B(A, B)
+        score += 1
+        print(f"\nCompare {A['name']} is {A['count']}")
+        print('vs')
+        print(f"Against {B['name']} is {B['count']}")
+        
+    elif a_or_b == 'b' and A['count'] < B['count']:
+        print("You're right")
+        A = B
+        B = random.choice(data)
+        B = make_B(A, B)
+        score += 1
+        
+        print(f"\nCompare {A['name']} is {A['count']}")
+        print('vs')
+        print(f"Against {B['name']} is {B['count']}")    
+    else:
+        print(f"sorry that's wrong your final score is {score}")
+        game = False
+
