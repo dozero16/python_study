@@ -1,0 +1,51 @@
+data = [
+    {'name': 'Camila Cabello','count': 55},
+    {'name': 'NBA','count': 47},
+    {'name': 'ABC','count': 33},
+    {'name': 'aaaABC','count': 33}]
+
+import random
+
+def get_new_dict():
+    return random.choice(data)
+
+def choice(a, b, answer):
+    if a['count'] > b['count']:
+        return answer == 'a'
+    elif a['count'] < b['count']:
+        return answer == 'b'
+    else:
+        return False
+    
+def game():
+    A = get_new_dict()
+    B = get_new_dict()
+    print("higher lower game")
+    
+    game_over = False
+    score = 0
+    while not game_over:
+        while A['count'] == B['count']:
+            B = get_new_dict()
+        print(f"\n{A['name']} is {A['count']}")
+        print("vs")
+        print(f"{B['name']} is {B['count']}")
+        
+        user_choice = input("A or B: ").lower()
+        if choice(a=A, b=B, answer=user_choice):
+            print("You are correct")
+            score += 1
+            print(f"Your current score is {score}")
+            if A['count'] > B['count']:
+                B = get_new_dict()
+            elif A['count'] < B['count']:
+                A = B
+                B = get_new_dict()
+            
+        else:
+            print("You are wrong")
+            print(f"Your final score is {score}")
+            game_over = True
+
+game()        
+        
