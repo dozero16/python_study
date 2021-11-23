@@ -1,0 +1,89 @@
+MENU = {
+    "espresso": {
+        "ingredients": {
+            "water": 50,
+            "milk": 0,
+            "coffee": 18,
+        },
+        "cost": 1.5,
+    },
+    "latte": {
+        "ingredients": {
+            "water": 200,
+            "milk": 150,
+            "coffee": 24,
+        },
+        "cost": 2.5,
+    },
+    "cappuccino": {
+        "ingredients": {
+            "water": 250,
+            "milk": 100,
+            "coffee": 24,
+        },
+        "cost": 3.0,
+    }
+}
+
+resources = {
+    "water": 300,
+    "milk": 200,
+    "coffee": 100,
+}
+
+def resource_su(machine_resources, order):
+    if machine_resources['water'] - MENU[order]["ingredients"]['water'] < 0:
+        print("Sorry there is not enough water")
+        return False
+    elif machine_resources['milk'] - MENU[order]["ingredients"]['milk'] < 0:
+        print("Sorry there is not enough milk")
+        return False
+    elif machine_resources['coffee'] - MENU[order]["ingredients"]['coffee'] < 0:
+        print("Sorry there is not enough coffee")
+        return False
+    else:
+        return True
+
+
+money_in_machine = 0
+
+run_machine = True
+while run_machine:
+    select_coffee = input("What would you like? (espresso/latte/cappuccino): ").lower()
+    if select_coffee == "off":
+        run_machine = False
+
+    elif select_coffee == "report":
+        print(f"Water: {resources['water']}ml")
+        print(f"Milk: {resources['milk']}ml")
+        print(f"Coffee: {resources['coffee']}g")
+        print(f"Money: ${money_in_machine}")
+
+    elif select_coffee in MENU:
+        if resource_su(machine_resources=resources, order=select_coffee) == False:
+            None
+        else:
+            print("Please insert coins.")
+            quarters = int(input("how many quarters: ")) * 25
+            dimes = int(input("how many dimes: ")) * 10
+            nickles = int(input("how many nickles: ")) * 5
+            pennies = int(input("how many pennies: ")) * 1
+
+            all_coin = (quarters + dimes + nickles + pennies)/100
+            exchange = all_coin - MENU[select_coffee]["cost"]
+
+            if exchange < 0:
+                print("Sorry that's not enough money")
+
+            else:
+                print(f"Here is ${exchange} in change.")
+                print(f"Here is your {select_coffee}☕. Enjoy!")
+                resources['water'] -= MENU[select_coffee]["ingredients"]['water']
+                resources['milk'] -= MENU[select_coffee]["ingredients"]['milk']
+                resources['coffee'] -= MENU[select_coffee]["ingredients"]['coffee']
+                money_in_machine += MENU[select_coffee]["cost"]
+    else:
+        print("Please type correct coffee type")
+
+# alt + shift + drag 한 번에 여러개 작성
+# alt + shift + upper arrow key
